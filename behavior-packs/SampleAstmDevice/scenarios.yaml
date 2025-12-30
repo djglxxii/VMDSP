@@ -1,0 +1,71 @@
+scenarios:
+  - name: SimpleHandshake
+    description: Basic ENQ/ACK/EOT handshake
+    steps:
+      - action: send
+        parameters:
+          data: ENQ
+      - action: wait_for
+        parameters:
+          match: ACK
+        delayMs: 100
+      - action: send
+        parameters:
+          data: EOT
+
+  - name: SingleResult
+    description: Send a single test result
+    steps:
+      - action: send
+        parameters:
+          data: ENQ
+        delayMs: 0
+      - action: wait_for
+        parameters:
+          match: ACK
+        delayMs: 100
+      - action: send_template
+        parameters:
+          template: HeaderRecord
+        delayMs: 50
+      - action: wait_for
+        parameters:
+          match: ACK
+        delayMs: 100
+      - action: send_template
+        parameters:
+          template: PatientRecord
+          values:
+            patientId: "12345"
+            lastName: "Doe"
+            firstName: "John"
+            dob: "19800101"
+            sex: "M"
+        delayMs: 50
+      - action: send_template
+        parameters:
+          template: ResultRecord
+          values:
+            seq: "1"
+            testCode: "GLU"
+            result: "95"
+            units: "mg/dL"
+            flags: "N"
+        delayMs: 50
+      - action: send_template
+        parameters:
+          template: TerminatorRecord
+        delayMs: 50
+      - action: send
+        parameters:
+          data: EOT
+
+  - name: BurstResults
+    description: Send multiple results in rapid succession
+    schedule:
+      intervalMs: 5000
+      repeatCount: 10
+    steps:
+      - action: trigger_scenario
+        parameters:
+          name: SingleResult

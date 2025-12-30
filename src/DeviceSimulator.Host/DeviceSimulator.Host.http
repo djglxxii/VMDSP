@@ -1,0 +1,6 @@
+@DeviceSimulator.Host_HostAddress = http://localhost:5002
+
+GET {{DeviceSimulator.Host_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

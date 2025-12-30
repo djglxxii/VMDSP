@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <ProjectReference Include="..\DeviceSimulator.Abstractions\DeviceSimulator.Abstractions.csproj" />
+  </ItemGroup>
+
+</Project>
