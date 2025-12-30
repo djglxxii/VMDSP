@@ -1,0 +1,11 @@
+timing:
+  responseDelayMs: 50
+  timeoutMs: 30000
+  retryDelayMs: 1000
+  maxRetries: 3
+behavior:
+  sendCrLf: true
+  strictFraming: true
+  custom:
+    vendorSpecificDelay: 100
+    supportsBidirectional: true

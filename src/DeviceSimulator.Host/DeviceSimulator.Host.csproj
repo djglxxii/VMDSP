@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <ItemGroup>
+    <ProjectReference Include="..\DeviceSimulator.Abstractions\DeviceSimulator.Abstractions.csproj" />
+    <ProjectReference Include="..\DeviceSimulator.Transport\DeviceSimulator.Transport.csproj" />
+    <ProjectReference Include="..\DeviceSimulator.Protocols.Hl7\DeviceSimulator.Protocols.Hl7.csproj" />
+    <ProjectReference Include="..\DeviceSimulator.Protocols.Astm\DeviceSimulator.Protocols.Astm.csproj" />
+    <ProjectReference Include="..\DeviceSimulator.Protocols.Poct1A\DeviceSimulator.Protocols.Poct1A.csproj" />
+    <ProjectReference Include="..\DeviceSimulator.BehaviorRuntime\DeviceSimulator.BehaviorRuntime.csproj" />
+    <ProjectReference Include="..\DeviceSimulator.Scenarios\DeviceSimulator.Scenarios.csproj" />
+    <ProjectReference Include="..\DeviceSimulator.Observability\DeviceSimulator.Observability.csproj" />
+    <ProjectReference Include="..\DeviceSimulator.Persistence\DeviceSimulator.Persistence.csproj" />
+  </ItemGroup>
+
+</Project>

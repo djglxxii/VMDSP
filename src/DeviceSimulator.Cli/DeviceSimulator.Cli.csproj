@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DeviceSimulator.Abstractions\DeviceSimulator.Abstractions.csproj" />
+    <ProjectReference Include="..\DeviceSimulator.BehaviorRuntime\DeviceSimulator.BehaviorRuntime.csproj" />
+    <ProjectReference Include="..\DeviceSimulator.Observability\DeviceSimulator.Observability.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,9 @@
+name: SampleAstmDevice
+vendor: POC-Vendor
+protocol: ASTM-E1381
+version: "1.0.0"
+description: Sample ASTM E1381 device simulator for testing
+supports:
+  - query
+  - result-upload
+  - bidirectional

@@ -1,0 +1,103 @@
+initialState: Idle
+states:
+  Idle:
+    description: Waiting for connection or ENQ
+    transitions:
+      - on: connect
+        goto: Connected
+        actions:
+          - type: log
+            parameters:
+              message: "Client connected"
+      - on: receive
+        match: ENQ
+        goto: Receiving
+        actions:
+          - type: send
+            parameters:
+              data: ACK
+          - type: log
+            parameters:
+              message: "Received ENQ, sent ACK, ready to receive"
+
+  Connected:
+    description: Connection established, ready for handshake
+    transitions:
+      - on: receive
+        match: ENQ
+        goto: Receiving
+        actions:
+          - type: send
+            parameters:
+              data: ACK
+      - on: disconnect
+        goto: Idle
+        actions:
+          - type: log
+            parameters:
+              message: "Client disconnected"
+
+  Receiving:
+    description: Receiving data frames from host
+    onEnter:
+      - type: log
+        parameters:
+          message: "Entered receiving state"
+    transitions:
+      - on: receive
+        match: EOT
+        goto: Idle
+        actions:
+          - type: log
+            parameters:
+              message: "Received EOT, transmission complete"
+      - on: receive
+        goto: Receiving
+        actions:
+          - type: send
+            parameters:
+              data: ACK
+          - type: log
+            parameters:
+              message: "Received frame, sent ACK"
+
+  Transmitting:
+    description: Sending data to host
+    transitions:
+      - on: receive
+        match: ACK
+        goto: Transmitting
+        actions:
+          - type: log
+            parameters:
+              message: "Received ACK for frame"
+      - on: receive
+        match: NAK
+        goto: Transmitting
+        actions:
+          - type: log
+            parameters:
+              message: "Received NAK, will retry"
+      - on: complete
+        goto: Idle
+        actions:
+          - type: send
+            parameters:
+              data: EOT
+          - type: log
+            parameters:
+              message: "Transmission complete, sent EOT"
+
+  Error:
+    description: Error state
+    onEnter:
+      - type: log
+        parameters:
+          message: "Entered error state"
+    transitions:
+      - on: reset
+        goto: Idle
+        actions:
+          - type: log
+            parameters:
+              message: "Reset from error state"

@@ -1,0 +1,31 @@
+type: ASTM-E1381
+settings:
+  port: 5001
+  mode: server
+  frameSize: 240
+  checksumEnabled: true
+  lineTerminator: CRLF
+messageTemplates:
+  - name: HeaderRecord
+    template: "H|\\^&|||Host^Simulator|||||||P|1|{timestamp}"
+    placeholders:
+      timestamp: "yyyyMMddHHmmss"
+  - name: PatientRecord
+    template: "P|1||{patientId}||{lastName}^{firstName}||{dob}|{sex}"
+    placeholders:
+      patientId: ""
+      lastName: ""
+      firstName: ""
+      dob: ""
+      sex: ""
+  - name: ResultRecord
+    template: "R|{seq}|^^^{testCode}|{result}|{units}||{flags}|||{timestamp}"
+    placeholders:
+      seq: "1"
+      testCode: ""
+      result: ""
+      units: ""
+      flags: ""
+      timestamp: ""
+  - name: TerminatorRecord
+    template: "L|1"
